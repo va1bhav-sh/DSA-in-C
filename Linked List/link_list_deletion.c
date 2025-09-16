@@ -78,7 +78,29 @@ struct Node *delLastNode(struct Node *head)
     prev->next = NULL;
     return head;
 }
-
+// Case 4 Deletig a node with a given value
+struct Node* delAtValue(struct Node*head,int value){
+    if (head!=NULL && head->data==value)
+    {
+        struct Node*temp=head;
+        head=head->next;
+        free(temp);
+        return head;
+    }
+    struct Node*prev=head;
+    while (prev->next!=NULL && prev->next->data!=value)
+    {
+        prev=prev->next;
+    }
+    if(prev->next==NULL){
+        printf("Value NOt Found!");
+    }
+    struct Node*del=prev->next;
+    prev->next=del->next;
+    free(del);
+    return head;
+    
+}
 int main()
 {
     struct Node *head = (struct Node *)malloc(sizeof(struct Node));
@@ -102,8 +124,11 @@ int main()
     // printf("Deleting a node at a position\n");
     // head = deleteAtPosition(head, 5);
     // Traverse(head);
-    printf("Deleting last node\n");
-    head = delLastNode(head);
+    // printf("Deleting last node\n");
+    // head = delLastNode(head);
+    // Traverse(head);
+    printf("Deleting at a value\n");
+    head = delAtValue(head,56);
     Traverse(head);
     return 0;
 }
