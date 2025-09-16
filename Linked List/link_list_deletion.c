@@ -24,6 +24,37 @@ struct Node *deleteFirstNode(struct Node *head)
     free(temp);        // free memory of the first node
     return head;
 }
+// Case 2 Deleting a node in between
+struct Node *deleteAtPosition(struct Node *head, int position)
+{
+    if (head == NULL)
+    {
+        return head;
+    }
+    if (position == 1)
+    {
+        struct Node *temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    struct Node *prev = head;
+    // Traverse to postion-1
+    for (int i = 1; i < position - 1 && prev!=NULL; i++)
+    {
+        prev = prev->next;
+    }
+    if(prev==NULL||prev->next==NULL){//Adds safety checks (prev == NULL || prev->next == NULL) → prevents segmentation faults.
+        printf("Invalid Position!\n");
+        return head;
+    }
+    // Store the node to delete
+    struct Node *del = prev->next;
+    // jump over the previous node
+    prev->next = del->next;
+    free(del);
+    return head;
+}
 
 int main()
 {
@@ -42,8 +73,11 @@ int main()
     fourth->next = NULL;
     printf("Linked List before deletion.\n");
     Traverse(head);
-    printf("Linked List after deleting first node.\n");
-    head=deleteFirstNode(head);
+    // printf("Linked List after deleting first node.\n");
+    // head=deleteFirstNode(head);
+    // Traverse(head);
+    printf("Deleting a node at a position\n");
+    head = deleteAtPosition(head, 5);
     Traverse(head);
 
     return 0;
