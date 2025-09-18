@@ -4,7 +4,14 @@ struct Node{
     int data;
     struct Node*next;
 };
-struct Node*cllTraveral(struct Node*head){
+// Function to traverse a circular linked list
+void cllTraversal(struct Node*head){
+    if (head==NULL)
+    {
+        printf("The list is empty");
+        return;
+    }
+    
     struct Node*temp=head;
     do
     {
@@ -27,7 +34,7 @@ int main(){
     third->next=fourth;
     fourth->data=8;
     fourth->next=head;
-   cllTraveral(head);
+   cllTraversal(head);
 
     return 0;
 }
