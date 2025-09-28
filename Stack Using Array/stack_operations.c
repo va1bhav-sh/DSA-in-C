@@ -51,6 +51,28 @@ int pop(struct stack *ptr)
         return value;
     } 
 }
+// Peek to lool at the top element
+int peek(struct stack*ptr){
+    if (isEmpty(ptr))
+    {
+        printf("Stack is empty.");  
+    }else{
+        return ptr->arr[ptr->top];
+    }
+    
+}
+// Peek at a particular postion
+int peekAtPos(struct stack*ptr,int pos){
+    int index=ptr->top-pos+1;
+    if (index<0)
+    {
+        printf("Invalid Positon!");
+        return -1;
+    }else{
+        return ptr->arr[index];
+    }
+    
+}
 int main()
 {
     struct stack *s;
@@ -66,8 +88,13 @@ int main()
     push(s,50);
     
     
-    printf("Popped: %d\n",pop(s));
-    printf("Popped: %d\n",pop(s));
+   // printf("Popped: %d\n",pop(s));
+    //printf("Popped: %d\n",pop(s));
+
+    printf("Top element:%d\n",peek(s));
+    printf("2nd element from top:%d\n",peekAtPos(s,2));
+
+
       // Cleanup
     free(s->arr);
     free(s);
