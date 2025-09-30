@@ -7,7 +7,7 @@ struct stack
     int *arr;
 };
 // Fucntion to check stack is empty.
-int isEmpty(struct stack *ptr)
+int isEmpty(struct stack *ptr)  //
 {
     if (ptr->top == -1)
     {
@@ -54,7 +54,7 @@ int pop(struct stack *ptr)
     }
 }
 // Peek to look at the top element
-int peek(struct stack *ptr)
+int peekAtTop(struct stack *ptr)
 {
     if (isEmpty(ptr))
     {
@@ -63,6 +63,18 @@ int peek(struct stack *ptr)
     else
     {
         return ptr->arr[ptr->top];
+    }
+}
+//Peek to loof the last element
+int peekAtLast(struct stack *ptr)
+{
+    if (isEmpty(ptr))
+    {
+        printf("Stack is empty.");
+    }
+    else
+    {
+        return ptr->arr[0];
     }
 }
 // Peek at a particular postion
@@ -113,7 +125,8 @@ int main()
     // printf("Popped: %d\n",pop(s));
     // printf("Popped: %d\n",pop(s));
 
-    printf("Top element:%d\n", peek(s));
+    printf("Top element:%d\n", peekAtTop(s));
+    printf("Last element:%d\n", peekAtLast(s));
     printf("2nd element from top~:%d\n", peekAtPos(s, 2));
 
     // Displaying the array
