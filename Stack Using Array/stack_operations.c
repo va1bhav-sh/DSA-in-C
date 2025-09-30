@@ -45,57 +45,80 @@ int pop(struct stack *ptr)
     {
         printf("stack Underflow");
         return -1;
-    }else{
-        int value=ptr->arr[ptr->top];
+    }
+    else
+    {
+        int value = ptr->arr[ptr->top];
         ptr->top--;
         return value;
-    } 
+    }
 }
-// Peek to lool at the top element
-int peek(struct stack*ptr){
+// Peek to look at the top element
+int peek(struct stack *ptr)
+{
     if (isEmpty(ptr))
     {
-        printf("Stack is empty.");  
-    }else{
+        printf("Stack is empty.");
+    }
+    else
+    {
         return ptr->arr[ptr->top];
     }
-    
 }
 // Peek at a particular postion
-int peekAtPos(struct stack*ptr,int pos){
-    int index=ptr->top-pos+1;
-    if (index<0)
+int peekAtPos(struct stack *ptr, int pos)
+{
+    int index = ptr->top - pos + 1;
+    if (index < 0)
     {
         printf("Invalid Positon!");
         return -1;
-    }else{
+    }
+    else
+    {
         return ptr->arr[index];
     }
-    
+}
+// Display
+void display(struct stack *ptr)
+{
+    if (isEmpty(ptr))
+    {
+        printf("Stack is empty! ");
+    }
+    else
+    {
+        printf("Stack (top->bottom):");
+        for (int i = 0; i < ptr->top; i++)
+        {
+            printf("%d", ptr->arr[i]);
+            printf("\n");
+        }
+    }
 }
 int main()
 {
     struct stack *s;
-    s = (struct stack *) malloc(sizeof(struct stack));
+    s = (struct stack *)malloc(sizeof(struct stack));
     s->size = 5;
     s->top = -1;
-    s->arr = (int *) malloc(s->size * sizeof(int));
-       // Perform stack operations
-    push(s,10);
-    push(s,20);
-    push(s,30);
-    push(s,40);
-    push(s,50);
-    
-    
-   // printf("Popped: %d\n",pop(s));
-    //printf("Popped: %d\n",pop(s));
+    s->arr = (int *)malloc(s->size * sizeof(int));
+    // Perform stack operations
+    push(s, 10);
+    push(s, 20);
+    push(s, 30);
+    push(s, 40);
+    push(s, 50);
 
-    printf("Top element:%d\n",peek(s));
-    printf("2nd element from top:%d\n",peekAtPos(s,2));
+    // printf("Popped: %d\n",pop(s));
+    // printf("Popped: %d\n",pop(s));
 
+    printf("Top element:%d\n", peek(s));
+    printf("2nd element from top~:%d\n", peekAtPos(s, 2));
 
-      // Cleanup
+    // Displaying the array
+    display(s);
+    // Cleanup
     free(s->arr);
     free(s);
     return 0;
